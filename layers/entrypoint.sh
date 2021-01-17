@@ -29,7 +29,7 @@ echo
 echo "Redirect from interface ${REDIRECT_FROM_INTERFACE} public IP is ${REDIRECT_FROM_INTERFACE_IP} on node ${NODE_HOSTNAME}"
 echo
 
-echo "Redirecting port ${REDIRECT_FROM_PORT} to ${REDIRECT_TO} (${REDIRECT_TO_IP}) port ${REDIRECT_TO_PORT}"
+echo "Redirecting port ${REDIRECT_FROM_PORT} to ${REDIRECT_TO}.${SUBDOMAIN} (${REDIRECT_TO_IP}) port ${REDIRECT_TO_PORT}"
 /usr/bin/redir -s -n ":${REDIRECT_FROM_PORT}" "${REDIRECT_TO}:${REDIRECT_TO_PORT}" &
 echo
 
