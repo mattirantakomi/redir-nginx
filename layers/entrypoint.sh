@@ -36,10 +36,14 @@ echo
 echo "Redirect from interface ${REDIRECT_FROM_INTERFACE} public IP is ${REDIRECT_FROM_INTERFACE_IP} on node ${NODE_HOSTNAME}"
 echo
 
+echo "echo 1 > /proc/sys/net/ipv4/conf/eth0.2/route_localnet"
+echo 1 > /proc/sys/net/ipv4/conf/eth0.2/route_localnet
+
 echo "stream {" >> /etc/nginx/conf.d/proxy.conf
 echo "  server {" >> /etc/nginx/conf.d/proxy.conf
 echo "    listen ${REDIRECT_FROM_PORT};" >> /etc/nginx/conf.d/proxy.conf
 echo "    proxy_pass 127.0.0.1:${REDIRECT_TO_PORT};" >> /etc/nginx/conf.d/proxy.conf
+echo "    proxy_bind $remote_addr transparent;" >> /etc/nginx/conf.d/proxy.conf
 echo "  }" >> /etc/nginx/conf.d/proxy.conf
 echo "}" >> /etc/nginx/conf.d/proxy.conf
 
