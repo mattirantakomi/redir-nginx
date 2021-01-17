@@ -30,22 +30,8 @@ echo "Redirect from interface ${REDIRECT_FROM_INTERFACE} public IP is ${REDIRECT
 echo
 
 echo "Redirecting port ${REDIRECT_FROM_PORT} to ${REDIRECT_TO}.${SUBDOMAIN} (${REDIRECT_TO_IP}) port ${REDIRECT_TO_PORT}"
-/usr/bin/redir -s -n ":${REDIRECT_FROM_PORT}" "${REDIRECT_TO}:${REDIRECT_TO_PORT}" --transproxy &
+/usr/bin/redir -s -n ":${REDIRECT_FROM_PORT}" "${REDIRECT_TO}:${REDIRECT_TO_PORT}" &
 echo
 
 pid=$!
 wait $!
-
-
-
-;; ANSWER SECTION:
-ingress-nginx-controller.ingress-nginx.svc.cluster.local. 5 IN A 10.43.24.7
-
-;; Query time: 1 msec
-;; SERVER: 10.43.0.10#53(10.43.0.10)
-;; WHEN: Sun Jan 17 09:24:11 UTC 2021
-;; MSG SIZE  rcvd: 169
-
-root@node3:/# dig ingress-nginx-controller.${SUBDOMAIN} +short
-10.43.24.7
-
