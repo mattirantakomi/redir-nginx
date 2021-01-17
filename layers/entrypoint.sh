@@ -30,7 +30,7 @@ echo "Redirect from interface ${REDIRECT_FROM_INTERFACE} public IP is ${REDIRECT
 echo
 
 echo "Redirecting port ${REDIRECT_FROM_PORT} to ${REDIRECT_TO}.${SUBDOMAIN} (${REDIRECT_TO_IP}) port ${REDIRECT_TO_PORT}"
-/usr/bin/redir -s -n ":${REDIRECT_FROM_PORT}" "${REDIRECT_TO}:${REDIRECT_TO_PORT}" &
+/usr/bin/redir -s -n ":${REDIRECT_FROM_PORT}" "${REDIRECT_TO}:${REDIRECT_TO_PORT}" --transproxy &
 echo
 
 pid=$!
