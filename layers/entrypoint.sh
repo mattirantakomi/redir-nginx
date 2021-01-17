@@ -43,7 +43,7 @@ echo "stream {" >> /etc/nginx/conf.d/proxy.conf
 echo "  server {" >> /etc/nginx/conf.d/proxy.conf
 echo "    listen ${REDIRECT_FROM_PORT};" >> /etc/nginx/conf.d/proxy.conf
 echo "    proxy_pass 127.0.0.1:${REDIRECT_TO_PORT};" >> /etc/nginx/conf.d/proxy.conf
-echo "    proxy_bind $remote_addr transparent;" >> /etc/nginx/conf.d/proxy.conf
+echo "    proxy_bind $remote_addr:${REDIRECT_TO_PORT} transparent;" >> /etc/nginx/conf.d/proxy.conf
 echo "  }" >> /etc/nginx/conf.d/proxy.conf
 echo "}" >> /etc/nginx/conf.d/proxy.conf
 
