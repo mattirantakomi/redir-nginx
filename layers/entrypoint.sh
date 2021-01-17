@@ -4,6 +4,13 @@ set -eo pipefail
 
 _term() {
   echo "TERM"
+  OLDIFS=$IFS
+  IFS=','
+  for RULE in $(iptables-save | grep PREROUTING | grep "${REDIRECT_FROM_INTERFACE}" | grep "\-\-dport ${REDIRECT_TO_PORT}" | sed -e "s/^-A/iptables -t nat -D/g"); do
+    echo "$RULE"
+    eval "$RULE"
+  done
+IFS=$OLDIFS
   kill -9 $pid
   echo "killed $pid"
   exit
@@ -32,8 +39,7 @@ echo
 echo "stream {" >> /etc/nginx/conf.d/proxy.conf
 echo "  server {" >> /etc/nginx/conf.d/proxy.conf
 echo "    listen ${REDIRECT_FROM_PORT};" >> /etc/nginx/conf.d/proxy.conf
-echo "    proxy_pass ${REDIRECT_TO}:${REDIRECT_TO_PORT};" >> /etc/nginx/conf.d/proxy.conf
-echo "    proxy_bind \$remote_addr transparent;" >> /etc/nginx/conf.d/proxy.conf
+echo "    proxy_pass 127.0.0.1:${REDIRECT_TO_PORT};" >> /etc/nginx/conf.d/proxy.conf
 echo "  }" >> /etc/nginx/conf.d/proxy.conf
 echo "}" >> /etc/nginx/conf.d/proxy.conf
 
