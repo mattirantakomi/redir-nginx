@@ -33,8 +33,8 @@ REDIRECT_TO_IP=$(dig ingress-nginx-controller.${SUBDOMAIN} +short)
 #/usr/bin/redir -s -n ":${REDIRECT_FROM_PORT}" "${REDIRECT_TO}:${REDIRECT_TO_PORT}" &
 #echo
 
-echo "iptables -t nat -I PREROUTING 1 -i ${REDIRECT_FROM_INTERFACE} -p tcp -m tcp --dport ${REDIRECT_TO_PORT} -j DNAT --to ${REDIRECT_TO}:${REDIRECT_TO_PORT}"
-iptables -t nat -I PREROUTING 1 -i ${REDIRECT_FROM_INTERFACE} -p tcp -m tcp --dport ${REDIRECT_TO_PORT} -j DNAT --to ${REDIRECT_TO}:${REDIRECT_TO_PORT}
+echo "iptables -t nat -I PREROUTING 1 -i ${REDIRECT_FROM_INTERFACE} -p tcp -m tcp --dport ${REDIRECT_TO_PORT} -j DNAT --to ${REDIRECT_TO_IP}:${REDIRECT_TO_PORT}"
+iptables -t nat -I PREROUTING 1 -i ${REDIRECT_FROM_INTERFACE} -p tcp -m tcp --dport ${REDIRECT_TO_PORT} -j DNAT --to ${REDIRECT_TO_IP}:${REDIRECT_TO_PORT}
 
 tail -f /dev/null
 
