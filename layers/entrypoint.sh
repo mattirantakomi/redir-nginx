@@ -23,7 +23,7 @@ REDIRECT_FROM_INTERFACE_IP="$(ifconfig ${REDIRECT_FROM_INTERFACE} | grep 'inet '
 echo "iptables -t nat -I PREROUTING 1 -i ${REDIRECT_FROM_INTERFACE} -p tcp -m tcp --dport ${REDIRECT_TO_PORT} -j ACCEPT"
 iptables -t nat -I PREROUTING 1 -i ${REDIRECT_FROM_INTERFACE} -p tcp -m tcp --dport ${REDIRECT_TO_PORT} -j ACCEPT
 
-echo "Redirect from interface ${REDIRECT_FROM_INTERFACE} public IP is {REDIRECT_FROM_INTERFACE_IP}"
+echo "Redirect from interface ${REDIRECT_FROM_INTERFACE} public IP is ${REDIRECT_FROM_INTERFACE_IP}"
 
 echo "Redirecting port ${REDIRECT_FROM_PORT} to ${REDIRECT_TO}:${REDIRECT_TO_PORT}"
 /usr/bin/redir -s -n ":${REDIRECT_FROM_PORT}" "${REDIRECT_TO}:${REDIRECT_TO_PORT}" &
